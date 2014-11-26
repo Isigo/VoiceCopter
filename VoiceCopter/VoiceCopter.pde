@@ -14,6 +14,7 @@ import processing.serial.*;
 
 CopterModel copter;
 String s;
+int s_int;
 
 void setup() {
   size(200,200);
@@ -29,19 +30,37 @@ void draw() {
   while (voce.SpeechInterface.getRecognizerQueueSize() > 0){//if voce detects voice
     s = voce.SpeechInterface.popRecognizedString();
     println(s);
-    if (s.equals("on") || s.equals("start")) { //start command to start motors
-  copter.throttle = 0.05;
-}
-else if (s.equals("off") || s.equals("stop")) { //start commands to start motors
-  copter.throttle = 0;
-} else {
-  copter.throttle = 0;
+    if (s.equals("on")) {
+      copter.throttle = 0.65;
+    }
+    else if (s.equals("off")) {
+      copter.throttle = 0;
+    }
+    else if (s.equals("turn on")) {
+      copter.rudder = 0.5;
+      copter.throttle = 0.5;
+    }
+    else if (s.equals("front")) {
+      copter.elevator = 0.1;
+    }
+    else if (s.equals("back")) {
+      copter.elevator = -0.1;
+    }
+    else if (s.equals("right")) {
+      copter.aileron = 0.1;
+    }
+    else if (s.equals("left")) {
+      copter.aileron = -0.1;
+    }
+    else {
+      copter.throttle = 0;
+      copter.elevator = 0;
+      copter.aileron = 0;
+      copter.rudder = 0;
+    }
+    
 }
 
-}
-
- 
- 
 }
 
 

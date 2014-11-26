@@ -6,4 +6,4 @@
 
 grammar copter;
 
-public <commands> = (on | off | start | stop) * ;
+public <commands> = (on | off | start | stop | turn | front | back | right | left) * ;
